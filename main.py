@@ -64,6 +64,15 @@ class UrlMiddleWare(BaseMiddleware):
                                 await message.reply('Посилання видалено')
                                 await message.delete()
                                 print("Посилання видалено")
+                            elif message.text != 'https://discord.gg/Nng8YQqmmx':
+                                await message.reply('Посилання видалено')
+                                await message.delete()
+                                print("Посилання видалено")
+                            elif message.text != 'https://t.me/samp_ukraine_bot':
+                                await message.reply('Посилання видалено')
+                                await message.delete()
+                                print("Посилання видалено")
+
                                 raise CancelHandler()
                             else:
                                 print('Не є заблокованим посиланням')

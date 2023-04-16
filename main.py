@@ -39,7 +39,7 @@ def normal_mat(word: str):
     # выводится нормальная форма. normal_form см. выше
     normal_form = parsed_token[0].normal_form
     # возвращаем результат всех процедур
-    print(normal_form)
+    # print(normal_form)
     return normal_form
 
 
@@ -59,7 +59,7 @@ async def echo_send(message: types.Message):
         await bot.restrict_chat_member(message.chat.id, message.from_user.id,
                                        types.ChatPermissions(can_send_messages=False),
                                        until_date=datetime.datetime.now() + datetime.timedelta(seconds=30))
-        print('Мут был выдан успешно')
+        # print('Мут был выдан успешно')
 
 
 class UrlMiddleWare(BaseMiddleware):
@@ -87,20 +87,20 @@ class UrlMiddleWare(BaseMiddleware):
                         if message.text != 'https://forum.samp-ukraine.com/index.php':
                             await message.reply('Посилання видалено')
                             await message.delete()
-                            print("Посилання видалено")
+                            # print("Посилання видалено")
                             raise CancelHandler()
                         elif message.text != 'https://www.samp-ukraine.com/':
                             await message.reply('Посилання видалено')
                             await message.delete()
-                            print("Посилання видалено")
+                            # print("Посилання видалено")
                         elif message.text != 'https://discord.gg/Nng8YQqmmx':
                             await message.reply('Посилання видалено')
                             await message.delete()
-                            print("Посилання видалено")
+                            # print("Посилання видалено")
                         elif message.text != 'https://t.me/samp_ukraine_bot':
                             await message.reply('Посилання видалено')
                             await message.delete()
-                            print("Посилання видалено")
+                            # print("Посилання видалено")
 
                         raise CancelHandler()
                     else:

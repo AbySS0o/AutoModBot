@@ -58,7 +58,7 @@ async def echo_send(message: types.Message):
         await bot.delete_message(message.chat.id, message.message_id)
         await bot.restrict_chat_member(message.chat.id, message.from_user.id,
                                        types.ChatPermissions(can_send_messages=False),
-                                       until_date=datetime.datetime.now() + datetime.timedelta(seconds=30))
+                                       until_date=datetime.datetime.now() + datetime.timedelta(seconds=300))
         # print('Мут был выдан успешно')
 
 

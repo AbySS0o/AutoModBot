@@ -53,7 +53,9 @@ async def echo_send(message : types.Message):
                 print(dtn.strftime("%d-%m-%Y %H:%M"), 'Гравець: ' + message.from_user.first_name, message.from_user.id, 'Повідомлення з порушенням: : ' + message.text, file=botlogfile)
                 #Сохраняем
                 botlogfile.close()
-                await message.reply('Твоє повідомлення містило непристойне слово, тому воно було видалене. Гравець замучений на 5хв')
+                
+                mention = f'<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>'
+                await message.reply(f'Повідомлення {mention} містило непристойне слово, тому воно було видалене. Гравець замучений на 5хв', parse_mode="HTML")
                 await bot.delete_message(message.chat.id, message.message_id)
                 await bot.restrict_chat_member(message.chat.id, message.from_user.id, types.ChatPermissions(can_send_messages=False), until_date = datetime.datetime.now() + datetime.timedelta(seconds=300))
                 print('Мут был выдан успешно')

@@ -16,7 +16,7 @@ from aiogram.types import MessageEntityType
 
 #логирование, конфиг
 logging.basicConfig(level=logging.INFO)
-bot = Bot('6140941878:AAGrkh469KVD1OZWsPe9PZIMtiqckBFGLXg')
+bot = Bot(os.getenv('BOT_TOKEN'))
 dp = Dispatcher(bot)
 
 async def on_startup(_):

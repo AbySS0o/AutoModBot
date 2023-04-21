@@ -1,6 +1,7 @@
 import logging
 import datetime
 import itertools
+import aiogram
 from aiogram import Bot, Dispatcher, executor, types
 import json
 import string
@@ -13,6 +14,10 @@ from pathlib import Path
 from aiogram.dispatcher.handler import CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.types import MessageEntityType
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 #логирование, конфиг
 logging.basicConfig(level=logging.INFO)

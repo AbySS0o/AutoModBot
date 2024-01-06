@@ -1,1 +1,1 @@
-# Samp Telegram Moderation Bot
+# Telegram automod

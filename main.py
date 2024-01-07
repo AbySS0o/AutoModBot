@@ -20,7 +20,7 @@ from aiogram.dispatcher.handler import CancelHandler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.types import MessageEntityType
 
-API_TOKEN = '6140941878:AAGrkh469KVD1OZWsPe9PZIMtiqckBFGLXg'
+API_TOKEN = 'YOUR_TOKEN'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 

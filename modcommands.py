@@ -8,13 +8,25 @@ async def mute_command(bot, message):
         user_id = message.reply_to_message.from_user.id
         mention = f'<a href="tg://user?id={user_id}">{message.reply_to_message.from_user.first_name}</a>'
         time = int(message.text[6:8])
+        num = ""
+        time_2 = ""
         if message.text.endswith("хв") or message.text.endswith("m"):
             time = 60 * time
+            num = "хв"
+            time_2 = time // 60
+        elif message.text.endswith("год") or message.text.endswith("h"):
+            time = 60 * 60 * time
+            num = "год"
+            time_2 = time // 3600
+        elif message.text.endswith("д") or message.text.endswith("d"):
+            time = 60 * 60 * 24 * time
+            num = "дн"
+            time_2 = time // 86400
         else:
             pass
 
         await bot.restrict_chat_member(message.chat.id, user_id, types.ChatPermissions(can_send_messages=False))
-        await message.reply(f"Користувач {mention} замучений", parse_mode="HTML")
+        await message.reply(f"Користувач {mention} замучений на {time_2} {num}", parse_mode="HTML")
 
         await asyncio.sleep(time)
 

@@ -80,18 +80,21 @@ class UrlMiddleWare(BaseMiddleware):
         return allowed_links
 
     async def on_pre_process_message(self, message: types.Message, data: dict):
-        if msg_entities := (message.entities or message.caption_entities):
-            for entitie in msg_entities:
-                if entitie.type in [MessageEntityType.URL, MessageEntityType.TEXT_LINK]:
-                    url = message.text[entitie.offset:entitie.offset + entitie.length]
+        admins_list = [admin.user.id for admin in await bot.get_chat_administrators(chat_id=message.chat.id)]
+        if message.from_user.id not in admins_list:
+            if msg_entities := (message.entities or message.caption_entities):
+                for entity in msg_entities:
+                    if entity.type in [MessageEntityType.URL, MessageEntityType.TEXT_LINK]:
+                        url = message.text[entity.offset:entity.offset + entity.length]
+                        mention = f'<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>'
 
-                    if not any(url.startswith(allowed_link) for allowed_link in self.allowed_links):
-                        await message.reply('Посилання видалено')
-                        await message.delete()
-                        print("Посилання видалено")
-                        raise CancelHandler()
-                    else:
-                        print("Дозволене посилання")
+                        if not any(url.startswith(allowed_link) for allowed_link in self.allowed_links):
+                            await message.reply(f'Посилання відправлене користувачем {mention} видалено', parse_mode='HTML')
+                            await message.delete()
+                            print("Посилання видалено")
+                            raise CancelHandler()
+                        else:
+                            print("Дозволене посилання")
 
 
 dp.setup_middleware(UrlMiddleWare())
